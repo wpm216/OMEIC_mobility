@@ -1,17 +1,20 @@
 % SI panel: atomistic results (beta = 0.3) with different island volume
 % fraction assumptions (0.55, 0.675, 0.8 initial volume fractions)
  
-d = "../data/island_MC_sims";
+d0 = "../data/island_MC_sims_varying_dilution/%s";
 % for atomistic
 atm_rates_0550 = zeros(15, 4);
 atm_rates_0675 = zeros(15, 4);
 atm_rates_0800 = zeros(15, 4);
 for i=1:15
-    [x, y] = wesMobility(rateTableAtomistic_beta03(:, :, i), "island_MC_sims_test/island_0.55", 0, []);
+    d = sprintf(d0, "island_0.55");
+    [x, y] = wesMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
     atm_rates_0550(i, :) = y;
-    [~, y] = wesMobility(rateTableAtomistic_beta03(:, :, i), "island_MC_sims_test/island_0.675", 0, []);
+    d = sprintf(d0, "island_0.675");
+    [~, y] = wesMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
     atm_rates_0675(i, :) = y;
-    [~, y] = wesMobility(rateTableAtomistic_beta03(:, :, i), "island_MC_sims_test/island_0.8", 0, []);
+    d = sprintf(d0, "island_0.8");
+    [~, y] = wesMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
     atm_rates_0800(i, :) = y;
 end
 

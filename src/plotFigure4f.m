@@ -5,12 +5,12 @@
 % Traces are lotted against approximate experimental results 
 %  (see publication for exact data).
 
-d = "../data/island_MC_sims";
+d = "../data/island_MC_sims_varying_dilution/island_0.675";
 
 % for atomistic samples. estimate error with mean of samples.
 beta03_rates = zeros(15, 4);
 for i=1:15
-    [~, y] = wesMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
+    [~, y] = filmMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
     beta03_rates(i, :) = y;
 end
 
@@ -19,7 +19,7 @@ n = 50;
 n18_rates = zeros(n, 4);
 rateArrays = zeros(4, 5, n);
 for i=1:n
-    [~, y] = wesMobility(n18total_b03, d, 1, [50 50 250 250]);
+    [~, y] = filmMobility(n18total_b03, d, 1, [50 50 250 250]);
     n18_rates(i, :) = y;
 end
 
@@ -27,7 +27,7 @@ end
 n = 50;
 pl_rates = zeros(n, 4);
 for i=1:n
-    [~, y] = wesMobility(rateTablePointlike_alessandro_beta03_n18_rd2, ...
+    [~, y] = filmMobility(rateTablePointlike_alessandro_beta03_n18_rd2, ...
                             d, 1, [50 50 50 50]);
     pl_rates(i, :) = y;
 end

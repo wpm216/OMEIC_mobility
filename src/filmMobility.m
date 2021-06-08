@@ -1,4 +1,4 @@
-function [x,y] = wesMobility(rateTable, islandDir, bootstrap, rowZMaxs)
+function [x,y] = filmMobility(rateTable, islandDir, bootstrap, rowZMaxs)
 
 % this script calculates the mobility using inter-grain CT rates.
 % rateTable comes from productionAtomistic, productionRodlike, or 

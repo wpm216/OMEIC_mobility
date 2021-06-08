@@ -6,18 +6,18 @@
 %  (see publication for exact data).
 
 n = 15; % we simply take the average of each atomistic replicate.
-d = "../data/island_MC_sims";
+d = "../data/island_MC_sims_varying_dilution/island_0.675";
 
 % for atomistic samples
 beta03_rates = zeros(n, 4);
 beta06_rates = zeros(n, 4);
 beta1_rates = zeros(n, 4);
 for i=1:n
-    [x, y] = wesMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
+    [x, y] = filmMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
     beta03_rates(i, :) = y;
-    [~, y] = wesMobility(rateTableAtomistic_beta06(:, :, i), d, 0, []);
+    [~, y] = filmMobility(rateTableAtomistic_beta06(:, :, i), d, 0, []);
     beta06_rates(i, :) = y;
-    [~, y] = wesMobility(rateTableAtomistic_beta1( :, :, i), d, 0, []);
+    [~, y] = filmMobility(rateTableAtomistic_beta1( :, :, i), d, 0, []);
     beta1_rates(i, :) = y;
 end
 
