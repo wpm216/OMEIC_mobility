@@ -1,0 +1,214 @@
+
+; topology file for PEDOT:PSS film
+
+; include force field and topology files
+#include "pedot_pss_bipolaron.ff/forcefield.itp"
+#include "topologies/PEDOT_1.top"
+#include "topologies/PEDOT_2.top"
+#include "topologies/PEDOT_3.top"
+#include "topologies/PSS_1.top"
+#include "topologies/PSS_2.top"
+#include "topologies/PSS_3.top"
+#include "topologies/PSS_4.top"
+#include "topologies/PSS_5.top"
+#include "topologies/PSS_6.top"
+#include "topologies/PSS_7.top"
+#include "topologies/PSS_8.top"
+#include "topologies/PSS_9.top"
+#include "topologies/PSS_10.top"
+#include "topologies/PSS_11.top"
+#include "topologies/PSS_12.top"
+#include "topologies/PSS_13.top"
+#include "topologies/PSS_14.top"
+#include "topologies/PSS_15.top"
+#include "topologies/PSS_16.top"
+#include "topologies/PSS_17.top"
+#include "topologies/PSS_18.top"
+#include "topologies/PSS_19.top"
+#include "topologies/PSS_20.top"
+#include "topologies/PSS_21.top"
+#include "topologies/PSS_22.top"
+#include "topologies/PSS_23.top"
+#include "topologies/PSS_24.top"
+#include "topologies/PSS_25.top"
+#include "topologies/PSS_26.top"
+#include "topologies/PSS_27.top"
+#include "topologies/PSS_28.top"
+#include "topologies/PSS_29.top"
+#include "topologies/PSS_30.top"
+#include "topologies/PSS_31.top"
+#include "topologies/PSS_32.top"
+#include "topologies/PSS_33.top"
+#include "topologies/PSS_34.top"
+#include "topologies/PSS_35.top"
+#include "topologies/PSS_36.top"
+#include "topologies/PSS_37.top"
+#include "topologies/PSS_38.top"
+#include "topologies/PSS_39.top"
+#include "topologies/PSS_40.top"
+#include "topologies/PSS_41.top"
+#include "topologies/PSS_42.top"
+#include "topologies/PSS_43.top"
+#include "topologies/PSS_44.top"
+#include "topologies/PSS_45.top"
+#include "topologies/PSS_46.top"
+#include "topologies/PSS_47.top"
+#include "topologies/PSS_48.top"
+#include "topologies/PSS_49.top"
+#include "topologies/PSS_50.top"
+#include "topologies/PSS_51.top"
+#include "topologies/PSS_52.top"
+#include "topologies/PSS_53.top"
+#include "topologies/PSS_54.top"
+#include "topologies/PSS_55.top"
+#include "topologies/PSS_56.top"
+#include "topologies/PSS_57.top"
+#include "topologies/PSS_58.top"
+#include "topologies/PSS_59.top"
+#include "topologies/PSS_60.top"
+#include "topologies/PSS_61.top"
+#include "topologies/PSS_62.top"
+#include "topologies/PSS_63.top"
+#include "topologies/PSS_64.top"
+#include "topologies/PSS_65.top"
+#include "topologies/PSS_66.top"
+#include "topologies/PSS_67.top"
+#include "topologies/PSS_68.top"
+#include "topologies/PSS_69.top"
+#include "topologies/PSS_70.top"
+#include "topologies/PSS_71.top"
+#include "topologies/PSS_72.top"
+#include "topologies/PSS_73.top"
+#include "topologies/PSS_74.top"
+#include "topologies/PSS_75.top"
+#include "topologies/PSS_76.top"
+#include "topologies/PSS_77.top"
+#include "topologies/PSS_78.top"
+#include "topologies/PSS_79.top"
+#include "topologies/PSS_80.top"
+#include "topologies/PSS_81.top"
+#include "topologies/PSS_82.top"
+#include "topologies/PSS_83.top"
+#include "topologies/PSS_84.top"
+#include "topologies/PSS_85.top"
+#include "topologies/PSS_86.top"
+#include "topologies/PSS_87.top"
+#include "topologies/PSS_88.top"
+#include "topologies/PSS_89.top"
+#include "topologies/PSS_90.top"
+#include "topologies/PSS_91.top"
+#include "topologies/PSS_92.top"
+#include "topologies/PSS_93.top"
+#include "topologies/PSS_94.top"
+#include "topologies/PSS_95.top"
+#include "topologies/PSS_96.top"
+
+
+
+
+[ system ]
+; Name
+ CG_PEDOT_PSS_film
+
+
+[ molecules ]
+; Name   n
+ PEDOT_1           21
+ PEDOT_2           21
+ PEDOT_3            0
+ PSS_1              1
+ PSS_2              1
+ PSS_3              1
+ PSS_4              1
+ PSS_5              1
+ PSS_6              1
+ PSS_7              1
+ PSS_8              1
+ PSS_9              1
+ PSS_10             1
+ PSS_11             1
+ PSS_12             1
+ PSS_13             1
+ PSS_14             1
+ PSS_15             1
+ PSS_16             1
+ PSS_17             1
+ PSS_18             1
+ PSS_19             1
+ PSS_20             1
+ PSS_21             1
+ PSS_22             1
+ PSS_23             1
+ PSS_24             1
+ PSS_25             1
+ PSS_26             1
+ PSS_27             1
+ PSS_28             1
+ PSS_29             1
+ PSS_30             1
+ PSS_31             1
+ PSS_32             1
+ PSS_33             1
+ PSS_34             1
+ PSS_35             1
+ PSS_36             1
+ PSS_37             1
+ PSS_38             1
+ PSS_39             1
+ PSS_40             1
+ PSS_41             1
+ PSS_42             1
+ PSS_43             1
+ PSS_44             1
+ PSS_45             1
+ PSS_46             1
+ PSS_47             1
+ PSS_48             1
+ PSS_49             1
+ PSS_50             1
+ PSS_51             1
+ PSS_52             1
+ PSS_53             1
+ PSS_54             1
+ PSS_55             1
+ PSS_56             1
+ PSS_57             1
+ PSS_58             1
+ PSS_59             1
+ PSS_60             1
+ PSS_61             1
+ PSS_62             1
+ PSS_63             1
+ PSS_64             1
+ PSS_65             1
+ PSS_66             1
+ PSS_67             1
+ PSS_68             1
+ PSS_69             1
+ PSS_70             1
+ PSS_71             1
+ PSS_72             1
+ PSS_73             1
+ PSS_74             1
+ PSS_75             1
+ PSS_76             1
+ PSS_77             1
+ PSS_78             1
+ PSS_79             1
+ PSS_80             1
+ PSS_81             1
+ PSS_82             1
+ PSS_83             1
+ PSS_84             1
+ PSS_85             1
+ PSS_86             1
+ PSS_87             1
+ PSS_88             1
+ PSS_89             1
+ PSS_90             1
+ PSS_91             1
+ PSS_92             1
+ PSS_93             1
+ PSS_94             1
+ PSS_95             1
+ PSS_96             1

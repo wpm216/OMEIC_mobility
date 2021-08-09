@@ -1,0 +1,48 @@
+
+integrator              =  md
+nsteps                  =  130000000 ; five cycles of the annealing schedule below
+dt                      =  0.001000
+nstlist                 =  20
+ns_type                 =  grid
+
+nstxout                 =  10000
+nstvout                 =  10000
+nstenergy               =  10000
+nstlog                  =  10000
+
+continuation            =  yes
+constraints             =  none
+lincs_iter              =  1
+lincs_order             =  4
+cutoff-scheme           =  Verlet
+
+rcoulomb                =  1.4
+rvdw                    =  1.4
+coulombtype             =  PME
+vdwtype                 =  PME
+pme_order               =  4
+fourierspacing          =  0.12
+
+tcoupl                  =  Nose-Hoover
+tc-grps                 =  System
+tau_t                   =  0.100000
+ref_t                   =  1000.000000
+nsttcouple              =  5
+
+pcoupl                  =  Parrinello-Rahman
+pcoupltype              =  isotropic
+tau_p                   =  1.000000
+ref_p                   =  1.000000
+compressibility         =  0.000045
+nstpcouple              =  1
+
+refcoord_scaling        =  com
+pbc                     =  xyz
+DispCorr                =  EnerPres
+gen_vel                 =  no
+
+; annealing schedule including "sub-Tg" hold (see SI Section S1)
+annealing               =  periodic
+annealing-npoints       =  7
+annealing-time          =  0   1000 11000 13000 23000 25000 26000
+annealing-temp          =  300 1100 1100  800   800   300   300

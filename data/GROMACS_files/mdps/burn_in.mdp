@@ -1,0 +1,46 @@
+
+;title                  =  NPT to re-equilibrate at standard pressure
+
+integrator              =  md
+nsteps                  =  5000000 ; 2 ns
+dt                      =  0.001000
+nstlist                 =  20
+ns_type                 =  grid
+
+nstxout                 =  50000
+nstvout                 =  50000
+nstenergy               =  50000
+nstlog                  =  50000
+
+continuation            =  yes
+constraints             =  none
+lincs_iter              =  1
+lincs_order             =  4
+cutoff-scheme           =  Verlet
+
+rcoulomb                =  1.4
+rvdw                    =  1.4
+coulombtype             =  PME
+vdwtype                 =  PME
+pme_order               =  4
+fourierspacing          =  0.12
+
+tcoupl                  =  Nose-Hoover
+tc-grps                 =  System
+tau_t                   =  0.100000
+ref_t                   =  400.000000
+nsttcouple              =  5
+
+pcoupl                  =  Parrinello-Rahman
+pcoupltype              =  isotropic
+tau_p                   =  1.000000
+ref_p                   =  1.000000
+compressibility         =  0.000045
+nstpcouple              =  1
+
+refcoord_scaling        =  com
+pbc                     =  xyz
+DispCorr                =  EnerPres
+gen_vel                 =  no
+
+

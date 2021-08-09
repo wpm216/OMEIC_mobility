@@ -1,0 +1,43 @@
+
+;title                  =  NVT 
+
+integrator              =  md
+nsteps                  =  100000 ; 1.0 ns
+dt                      =  0.000100
+nstlist                 =  20
+nstxout                 =  100
+nstvout                 =  100
+nstenergy               =  100
+nstlog                  =  100
+
+cutoff-scheme           =  group
+ns_type                 =  simple
+
+continuation            =  yes
+constraint_algorithm    =  lincs
+constraints             =  none
+lincs_iter              =  1
+lincs_order             =  4
+
+cutoff-scheme           =  Verlet
+ns_type                 =  grid
+rcoulomb                =  1.4
+rvdw                    =  1.4
+coulombtype             =  cutoff
+vdwtype                 =  cutoff
+pme_order               =  4
+fourierspacing          =  0.12
+
+tcoupl                  =  Nose-Hoover
+tc-grps                 =  System
+tau_t                   =  0.100000
+ref_t                   =  300.000000
+nsttcouple              =  5
+
+pcoupl                  =  No
+
+refcoord_scaling        =  com
+pbc                     =  xyz
+periodic-molecules      =  no
+DispCorr                =  no
+gen_vel                 =  no
