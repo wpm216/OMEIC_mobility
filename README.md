@@ -30,7 +30,7 @@ generate steady-state charge-transfer rates between pairs of PEDOT-rich grains.
 - Files beginning with `plot`, e.g. `/src/plotFigure4e`,
 calculate film mobility vs. PEDOT to PSS weight ratio
 (see SI Section S3).
-These use the above ``production'' functions.
+These use the above `production*` functions.
 - Other files contain accessory functions.
 - A Dijkstra's algorithm [implementation](https://www.mathworks.com/matlabcentral/fileexchange/36140-dijkstra-algorithm)
 by Dimas Aryo is used and included in the repository.
