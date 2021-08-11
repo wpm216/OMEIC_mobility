@@ -37,28 +37,28 @@ write_pdb = 0; % flag to write PDBs (1 = true, 0 = false)
 % Run simulations.
 
 % for atomistic samples. estimate error with mean of samples.
-rateTableAtomistic = productionAtomistic(beta, grainRadius, atomistic_d_mats);
+rateTableAtomistic_beta_03 = productionAtomistic(beta, grainRadius, atomistic_d_mats);
 atomistic_mobilities = zeros(15, 4);
 for i=1:15
-    [~, y] = filmMobility(rateTableAtomistic(:, :, i), grain_configurations, 0, []);
+    [~, y] = filmMobility(rateTableAtomistic_beta_03(:, :, i), grain_configurations, 0, []);
     atomistic_mobilities(i, :) = y;
 end
 
 % for rodlike samples. do bootstrapping in filmMobility to estimate error.
-rateTableRodlike = productionRodlike(pedotsPerCell, boxLengths, ...
+rateTableRodlike_beta_03 = productionRodlike(pedotsPerCell, boxLengths, ...
     unitCellLength, pedotLengthDistribution, nreps, beta, grainRadius, write_pdb);
 rodlike_mobilities = zeros(n_bootstrap_samples, 4);
 for i=1:n_bootstrap_samples
-    [~, y] = filmMobility(rateTableRodlike, grain_configurations, 1, nreps);
+    [~, y] = filmMobility(rateTableRodlike_beta_03, grain_configurations, 1, nreps);
     rodlike_mobilities(i, :) = y;
 end
 
 % for pointlike samples. do bootstrapping in filmMobility to estimate error.
-rateTablePointlike = productionPointlike(pedotsPerCell, beta, ... 
+rateTablePointlike_beta_03 = productionPointlike(pedotsPerCell, beta, ... 
                             nreps, grainRadius, boxLengths, unitCellLength);
 pointlike_mobilities = zeros(n_bootstrap_samples, 4);
 for i=1:n_bootstrap_samples
-    [~, y] = filmMobility(rateTablePointlike, grain_configurations, 1, nreps);
+    [~, y] = filmMobility(rateTablePointlike_beta_03, grain_configurations, 1, nreps);
     pointlike_mobilities(i, :) = y;
 end
 

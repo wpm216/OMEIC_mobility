@@ -1,7 +1,8 @@
 # OMEIC_mobility
-Hole mobility in Organic Mixed Electronic and Ionic Conductors (OMEICS),
-accompanying 
-'Efficient electronic transport through the insulator-rich phase in PEDOT:PSS blends'
+Mutiscale modeling of
+hole mobility in Organic Mixed Electronic and Ionic Conductors (OMEICS),
+accompanying the manuscript
+'Efficient electronic tunneling in the insulator-rich phase governs transport in conductive polymer blends'
 by S.T. Keene, W. Michaels, et al.
 
 ## Contents:
@@ -29,5 +30,8 @@ generate steady-state charge-transfer rates between pairs of PEDOT-rich grains.
 - Files beginning with `plot`, e.g. `/src/plotFigure4e`,
 calculate film mobility vs. PEDOT to PSS weight ratio
 (see SI Section S3).
+These use the above ``production'' functions.
 - Other files contain accessory functions.
+- A Dijkstra's algorithm [implementation](https://www.mathworks.com/matlabcentral/fileexchange/36140-dijkstra-algorithm)
+by Dimas Aryo is used and included in the repository.
 

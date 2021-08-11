@@ -1,5 +1,6 @@
 % SI panel: atomistic results (beta = 0.3) with different grain volume
 % fraction assumptions (0.55, 0.675, 0.8 initial volume fractions)
+
  
 % File paths and parameters
 grain_configurations = "../data/grain_MC_sims_varying_dilution/grain_0.675";
@@ -8,25 +9,21 @@ beta = 0.3;
 d0 = "../data/grain_MC_sims_varying_dilution/%s";
 
 % Gather kss data and apply to different grain concentrations
-rateTableAtomistic = productionAtomistic(beta, grainRadius, atomistic_d_mats);
-atm_rates_0550 = zeros(15, 4);
-atm_rates_0675 = zeros(15, 4);
-atm_rates_0800 = zeros(15, 4);
+rateTableAtomistic_beta03 = productionAtomistic(beta, grainRadius, atomistic_d_mats);
+atm_rates_v_0550 = zeros(15, 4);
+atm_rates_v_0675 = zeros(15, 4);
+atm_rates_v_0800 = zeros(15, 4);
 for i=1:15
     d = sprintf(d0, "grain_0.55");
-    [x, y] = filmMobility(rateTableAtomistic(:, :, i), d, 0, []);
-    atm_rates_0550(i, :) = y;
+    [x, y] = filmMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
+    atm_rates_v_0550(i, :) = y;
     d = sprintf(d0, "grain_0.675");
-    [~, y] = filmMobility(rateTableAtomistic(:, :, i), d, 0, []);
-    atm_rates_0675(i, :) = y;
+    [~, y] = filmMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
+    atm_rates_v_0675(i, :) = y;
     d = sprintf(d0, "grain_0.8");
-    [~, y] = filmMobility(rateTableAtomistic(:, :, i), d, 0, []);
-    atm_rates_0800(i, :) = y;
+    [~, y] = filmMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
+    atm_rates_v_0800(i, :) = y;
 end
-
-rates_0550 = atm_rates_0550;
-rates_0675 = atm_rates_0675;
-rates_0800 = atm_rates_0800;
 
 figure;
 hold on;
@@ -42,14 +39,14 @@ x0675 = [4.6, 8.1, 13.5, 23.9];
 x0800 = [3.8, 6.2, 9.6, 15.8];
 
 % means
-m0550 = mean(rates_0550, 1);
-m0675 = mean(rates_0675, 1);
-m0800 = mean(rates_0800, 1);
+m0550 = mean(atm_rates_v_0550, 1);
+m0675 = mean(atm_rates_v_0675, 1);
+m0800 = mean(atm_rates_v_0800, 1);
 
 % 95% CI on mean
-e0550 = sqrt(var(rates_0550)/15) * 1.753;
-e0675 = sqrt(var(rates_0675)/15) * 1.753;
-e0800 = sqrt(var(rates_0800)/15) * 1.753;
+e0550 = sqrt(var(atm_rates_v_0550)/15) * 1.753;
+e0675 = sqrt(var(atm_rates_v_0675)/15) * 1.753;
+e0800 = sqrt(var(atm_rates_v_0800)/15) * 1.753;
 
 % do plot
 shift = 0.1;
