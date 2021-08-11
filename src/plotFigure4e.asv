@@ -5,7 +5,7 @@
 % Traces are plotted against approximate experimental results.
 
 % Sampling parameters
-n_samples = 15; % we take the average of each atomistic replicate.
+n_samples = 15; % we simply take the average of each atomistic replicate.
 d = "../data/grain_MC_sims_varying_dilution/grain_0.675";
 
 % Generate mobility curves from atomistic data.

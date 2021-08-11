@@ -1,4 +1,4 @@
-function [x,y] = filmMobility(rateTable, islandDir, bootstrap, rowZMaxs)
+function [x,y] = filmMobility(rateTable, grainDir, bootstrap, rowZMaxs)
 
 % this script calculates the mobility using inter-grain CT rates.
 % rateTable comes from productionAtomistic, productionRodlike, or 
@@ -11,8 +11,8 @@ else
 end
     
     
-islandRadius = 100; % Angstroms
-boxLength = 2263 + 4 * islandRadius; % same as Alessandro
+grainRadius = 100; % Angstroms
+boxLength = 2263 + 4 * grainRadius; 
 
 % unitCellSizes = [85.5660 84.2844 83.6185 83.4340]; % for atomistic
 unitCellSizes = [85 85 85 85]; % for rod-like and point-like
@@ -44,12 +44,12 @@ for i = 1:4
     for j = 1:24
         
         % Load the coordinates of the particles
-        fname = sprintf("%s/fort.1%d%02d", islandDir, i, j);
+        fname = sprintf("%s/fort.1%d%02d", grainDir, i, j);
         coord = load(fname);
         
         % Calculate the distance array for the particles 
         % Start by adding first and last 'particles' representing box ends
-        X=[-2*islandRadius, 0, 0; coord; boxLength + 2*islandRadius, 0, 0]; 
+        X=[-2*grainRadius, 0, 0; coord; boxLength + 2*grainRadius, 0, 0]; 
 
         % Calculate the overall rate.
         K=interGrainCTRate(X,rate_dist,d0,dd);

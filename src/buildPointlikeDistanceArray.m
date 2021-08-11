@@ -2,7 +2,7 @@ function X=buildPointlikeDistanceArray(L,n)
 % this function generates the geometry of a model of two dots of radius r
 % separated by a medium containing redox molecules
 % L = length of box
-% n = number of point particles (islands are added on top of this)
+% n = number of point particles (grains are added on top of this)
 
 r=100.0;             % radius of dots in angstrom
 X=zeros(n+2,3);

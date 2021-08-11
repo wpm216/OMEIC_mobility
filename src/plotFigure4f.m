@@ -1,3 +1,4 @@
+
 % Generate computational traces for Figure 4f:
 %   - atomistic mobility, beta = 0.3
 %   - rodlike mobility, beta = 0.3
@@ -5,60 +6,91 @@
 % Traces are lotted against approximate experimental results 
 %  (see publication for exact data).
 
-d = "../data/island_MC_sims_varying_dilution/island_0.675";
+%%%%%%%%%%
+
+% General parameters for atomistic, rodlike, and pointlike simulations.
+beta = 0.3; % 1/Angstroms
+
+% Grain and box parameters
+grainRadius = 100; % Angstroms
+unitCellLength = 85; % Angstroms
+boxLengths = [3 4 5 6 7]; % multiples of lengths of unit cell
+nreps = [25 50 500 500]; % number of replicates to do for each (pedotsPerCell, boxLengths) pair
+                       % (rodlike and pointlike)
+
+% PEDOT-focused parameters
+pedotsPerCell = [21 10 5 3]; % number of N=6 and N=12 (each) pedot lengths in cell (atomistic)
+pedotLengthDistribution = zeros(1, 24); % number of PEDOTs of length=k in each cell 
+                                        % (scaling factor applied to elements of pedotsPerCell(i))
+pedotLengthDistribution(18) = 1;
+
+% Sampling parameters
+grain_configurations = "../data/grain_MC_sims_varying_dilution/grain_0.675";
+atomistic_d_mats = '../data/distance_matrices';
+n_bootstrap_samples = 50;
+
+% Miscellaneous parameters
+write_pdb = 0; % flag to write PDBs (1 = true, 0 = false)
+
+%%%%%%%%%%
+
+% Run simulations.
 
 % for atomistic samples. estimate error with mean of samples.
-beta03_rates = zeros(15, 4);
+rateTableAtomistic = productionAtomistic(beta, grainRadius, atomistic_d_mats);
+atomistic_mobilities = zeros(15, 4);
 for i=1:15
-    [~, y] = filmMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
-    beta03_rates(i, :) = y;
+    [~, y] = filmMobility(rateTableAtomistic(:, :, i), grain_configurations, 0, []);
+    atomistic_mobilities(i, :) = y;
 end
 
-% for rodlike samples. do bootstrapping in wesMobility to estimate error.
-n = 50;
-n18_rates = zeros(n, 4);
-rateArrays = zeros(4, 5, n);
-for i=1:n
-    [~, y] = filmMobility(n18total_b03, d, 1, [50 50 250 250]);
-    n18_rates(i, :) = y;
+% for rodlike samples. do bootstrapping in filmMobility to estimate error.
+rateTableRodlike = productionRodlike(pedotsPerCell, boxLengths, ...
+    unitCellLength, pedotLengthDistribution, nreps, beta, grainRadius, write_pdb);
+rodlike_mobilities = zeros(n_bootstrap_samples, 4);
+for i=1:n_bootstrap_samples
+    [~, y] = filmMobility(rateTableRodlike, grain_configurations, 1, nreps);
+    rodlike_mobilities(i, :) = y;
 end
 
-% for pointlike samples. do bootstrapping in wesMobility to estimate error.
-n = 50;
-pl_rates = zeros(n, 4);
-for i=1:n
-    [~, y] = filmMobility(rateTablePointlike_alessandro_beta03_n18_rd2, ...
-                            d, 1, [50 50 50 50]);
-    pl_rates(i, :) = y;
+% for pointlike samples. do bootstrapping in filmMobility to estimate error.
+rateTablePointlike = productionPointlike(pedotsPerCell, beta, ... 
+                            nreps, grainRadius, boxLengths, unitCellLength);
+pointlike_mobilities = zeros(n_bootstrap_samples, 4);
+for i=1:n_bootstrap_samples
+    [~, y] = filmMobility(rateTablePointlike, grain_configurations, 1, nreps);
+    pointlike_mobilities(i, :) = y;
 end
+
+% Plot data.
 
 figure;
 hold on;
 
-% experiment
+% Experiment.
 x = [1.7 5.1 1.7*5 1.7*10 1.7* 15]; % omitting last point for clarity
 y = [0.4 0.11 -0.3 -0.95 -2.25];    % omitting last point for clarity
 plot(x, y, '.b', 'Markersize', 30)
 
+% Simulation.
 x = [4.6 8.1 13.53 23.85];
 
 % means
-b03m = mean(beta03_rates, 1); % atomistic, beta = 0.3
-n18m = mean(n18_rates, 1);    % rodlike, N=18, beta = 0.3
-plm = mean(pl_rates, 1);      % pointlike, beta = 0.3
-
+mean_atm = mean(atomistic_mobilities, 1);  % atomistic, beta = 0.3
+mean_rod = mean(rodlike_mobilities, 1);    % rodlike, N=18, beta = 0.3
+mean_pnt = mean(pointlike_mobilities, 1);  % pointlike, beta = 0.3
 
 % 95% CI on mean
-b03e = sqrt(var(beta03_rates)/15) * 1.753;
-n18e = sqrt(var(n18_rates)/50) *  2.0086;
-ple = sqrt(var(pl_rates)/50) *  2.0086;
+err_atm = sqrt(var(atomistic_mobilities)/15) * 1.753;
+err_rod = sqrt(var(rodlike_mobilities)/50) *  2.0086;
+err_pnt = sqrt(var(pointlike_mobilities)/50) *  2.0086;
 
 % do plot
-t1 = errorbar(x, b03m - b03m(1) - 0.1, b03e, '-o');
+t1 = errorbar(x, mean_atm - mean_atm(1) - 0.1, err_atm, '-o');
 set(t1, 'MarkerFaceColor', get(t1,'Color'));
-t2 = errorbar(x, n18m - n18m(1) - 0.1, n18e, '-o');
+t2 = errorbar(x, mean_rod - mean_rod(1) - 0.1, err_rod, '-o');
 set(t2, 'MarkerFaceColor', get(t2,'Color'));
-t3 = errorbar(x, mean_pl_y - mean_pl_y(1) - 0.1, ple, '-o');
+t3 = errorbar(x, mean_pnt - mean_pnt(1) - 0.1, err_pnt, '-o');
 set(t3, 'MarkerFaceColor', get(t3,'Color'));
 
 legend('Experiment', 'Atomistic', 'Rod-like ($N = 18$)', 'Point-like', ...

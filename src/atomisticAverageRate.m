@@ -1,5 +1,5 @@
 function [S, VarS, xBoxSize, v] = atomisticAverageRate(datfiles, boxLength, ...
-                                   betaValue, dirname, islandRadius)
+                                   betaValue, dirname, grainRadius)
 
 % datfiles: a 1-D array of matlab objects, each containing:
 %   d.l: box dimensions of (cubic) unit cell.
@@ -25,22 +25,22 @@ for j=1:nfiles
     
     % Make boxes in x, y, and z directions
     xBoxSize = [boxLength, 5, 5] .* unitSize;
-    xLeftIsland = [0, 5/2, 5/2].* unitSize;
-    xRightIsland = [boxLength, 5/2, 5/2] .* unitSize;
+    xLeftgrain = [0, 5/2, 5/2].* unitSize;
+    xRightgrain = [boxLength, 5/2, 5/2] .* unitSize;
     
     yBoxSize = [5, boxLength, 5] .* unitSize;
-    yLeftIsland = [5/2, 0, 5/2].* unitSize;
-    yRightIsland = [5/2, boxLength, 5/2] .* unitSize;
+    yLeftgrain = [5/2, 0, 5/2].* unitSize;
+    yRightgrain = [5/2, boxLength, 5/2] .* unitSize;
     
     zBoxSize = [5, 5, boxLength] .* unitSize;
-    zLeftIsland = [5/2, 5/2, 0] .* unitSize;
-    zRightIsland = [5/2, 5/2, boxLength] .* unitSize;
+    zLeftgrain = [5/2, 5/2, 0] .* unitSize;
+    zRightgrain = [5/2, 5/2, boxLength] .* unitSize;
     
     boxes = [xBoxSize; yBoxSize; zBoxSize];
     
-    islands = [xLeftIsland, xRightIsland;
-               yLeftIsland, yRightIsland;
-               zLeftIsland, zRightIsland];
+    grains = [xLeftgrain, xRightgrain;
+               yLeftgrain, yRightgrain;
+               zLeftgrain, zRightgrain];
     
     for k=1:3
         
@@ -55,7 +55,7 @@ for j=1:nfiles
 
         % Run the model (x direction)
         [K, ~] = buildAtomisticRateArray(unitSize, boxes(k, :), unitPositions, nnVecArrays, ...
-                            betaValue, islandRadius, islands(k, 1:3), islands(k, 4:6), pdbname);
+                            betaValue, grainRadius, grains(k, 1:3), grains(k, 4:6), pdbname);
         v = sscompute(K);  % compute the steady state rate 
         S(3*(j-1)+k) = log(v);
         t(3*(j-1)+k) = log(v);

@@ -1,20 +1,26 @@
-% SI panel: atomistic results (beta = 0.3) with different island volume
+% SI panel: atomistic results (beta = 0.3) with different grain volume
 % fraction assumptions (0.55, 0.675, 0.8 initial volume fractions)
  
-d0 = "../data/island_MC_sims_varying_dilution/%s";
-% for atomistic
+% File paths and parameters
+grain_configurations = "../data/grain_MC_sims_varying_dilution/grain_0.675";
+atomistic_d_mats = '../data/distance_matrices';
+beta = 0.3;
+d0 = "../data/grain_MC_sims_varying_dilution/%s";
+
+% Gather kss data and apply to different grain concentrations
+rateTableAtomistic = productionAtomistic(beta, grainRadius, atomistic_d_mats);
 atm_rates_0550 = zeros(15, 4);
 atm_rates_0675 = zeros(15, 4);
 atm_rates_0800 = zeros(15, 4);
 for i=1:15
-    d = sprintf(d0, "island_0.55");
-    [x, y] = wesMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
+    d = sprintf(d0, "grain_0.55");
+    [x, y] = filmMobility(rateTableAtomistic(:, :, i), d, 0, []);
     atm_rates_0550(i, :) = y;
-    d = sprintf(d0, "island_0.675");
-    [~, y] = wesMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
+    d = sprintf(d0, "grain_0.675");
+    [~, y] = filmMobility(rateTableAtomistic(:, :, i), d, 0, []);
     atm_rates_0675(i, :) = y;
-    d = sprintf(d0, "island_0.8");
-    [~, y] = wesMobility(rateTableAtomistic_beta03(:, :, i), d, 0, []);
+    d = sprintf(d0, "grain_0.8");
+    [~, y] = filmMobility(rateTableAtomistic(:, :, i), d, 0, []);
     atm_rates_0800(i, :) = y;
 end
 
